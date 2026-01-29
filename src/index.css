@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Modo Claro - Paleta Chill */
+    --background: 48 20% 97%; /* #FAF9F6 hueso cálido */
+    --foreground: 220 9% 18%; /* #2C2E33 gris antracita suave */
+    --card: 0 0% 100%;
+    --card-foreground: 220 9% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 9% 18%;
+    --primary: 165 16% 55%; /* #7C9D96 sage */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 48 14% 93%; /* #F5F5F0 */
+    --secondary-foreground: 220 9% 18%;
+    --muted: 48 14% 93%;
+    --muted-foreground: 220 5% 46%; /* #6B7280 */
+    --accent: 214 22% 66%; /* #8FA3BF azul polvo */
+    --accent-foreground: 220 9% 18%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 48 10% 88%;
+    --input: 48 10% 88%;
+    --ring: 165 16% 55%;
+    --radius: 0.75rem;
+    --sidebar-background: 48 20% 97%;
+    --sidebar-foreground: 220 9% 18%;
+    --sidebar-primary: 165 16% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 48 14% 93%;
+    --sidebar-accent-foreground: 220 9% 18%;
+    --sidebar-border: 48 10% 88%;
+    --sidebar-ring: 165 16% 55%;
+  }
+
+  .dark {
+    /* Modo Oscuro - Paleta Noche */
+    --background: 220 11% 13%; /* #1E2025 carbón azulado */
+    --foreground: 240 5% 91%; /* #E8E8EA blanco huevo */
+    --card: 220 9% 17%; /* #272A30 gris elevado */
+    --card-foreground: 240 5% 91%;
+    --popover: 220 9% 17%;
+    --popover-foreground: 240 5% 91%;
+    --primary: 165 16% 68%; /* #9DBEB8 menta suave */
+    --primary-foreground: 220 11% 13%;
+    --secondary: 220 9% 20%;
+    --secondary-foreground: 240 5% 91%;
+    --muted: 220 9% 20%;
+    --muted-foreground: 218 10% 64%; /* #9CA3AF */
+    --accent: 214 28% 73%; /* #A5B8D0 azul niebla */
+    --accent-foreground: 220 11% 13%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 9% 22%;
+    --input: 220 9% 22%;
+    --ring: 165 16% 68%;
+    --sidebar-background: 220 11% 13%;
+    --sidebar-foreground: 240 5% 91%;
+    --sidebar-primary: 165 16% 68%;
+    --sidebar-primary-foreground: 220 11% 13%;
+    --sidebar-accent: 220 9% 20%;
+    --sidebar-accent-foreground: 240 5% 91%;
+    --sidebar-border: 220 9% 22%;
+    --sidebar-ring: 165 16% 68%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+  
+  ::selection {
+    background-color: hsl(var(--primary) / 0.3);
+  }
+}
+
+@layer components {
+  /* Blob shape para foto de perfil */
+  .blob-shape {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: morph 8s ease-in-out infinite;
+  }
+  
+  /* Glassmorphism suave para navegación */
+  .glass-nav {
+    @apply backdrop-blur-md bg-background/80;
+  }
+  
+  /* Transiciones suaves para tema */
+  .theme-transition {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Animación de fade para cambio de idioma */
+  .lang-fade {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Scrollbar personalizada chill */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.8);
+  }
+}
+
+@layer utilities {
+  /* Utilidades para gradientes */
+  .gradient-chill {
+    background: linear-gradient(135deg, hsl(var(--accent) / 0.15) 0%, hsl(var(--primary) / 0.1) 100%);
+  }
+  
+  .gradient-chill-dark {
+    background: linear-gradient(135deg, hsl(var(--accent) / 0.1) 0%, hsl(var(--primary) / 0.08) 100%);
+  }
+  
+  /* Texto con gradiente */
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--primary)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Keyframes adicionales */
+@keyframes morph {
+  0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
