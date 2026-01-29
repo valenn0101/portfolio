@@ -8,6 +8,7 @@ export function Navigation() {
 
   const navLinks = [
     { href: '#about', label: t('nav.about') },
+    { href: '#skills', label: t('nav.skills') },
     { href: '#blog', label: t('nav.blog') },
     { href: '#services', label: t('nav.services') },
     { href: '#contact', label: t('nav.contact') },

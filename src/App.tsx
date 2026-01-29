@@ -2,6 +2,7 @@ import { ThemeProvider } from '@/hooks/useTheme';
 import { LanguageProvider } from '@/hooks/useLanguage';
 import { Navigation } from '@/sections/Navigation';
 import { Hero } from '@/sections/Hero';
+import { About } from '@/sections/About';
 import { Skills } from '@/sections/Skills';
 import { Blog } from '@/sections/Blog';
 import { Services } from '@/sections/Services';
@@ -16,6 +17,7 @@ function App() {
           <Navigation />
           <main>
             <Hero />
+            <About />
             <Skills />
             <Blog />
             <Services />

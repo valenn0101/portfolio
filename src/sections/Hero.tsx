@@ -1,93 +1,119 @@
-import { useLanguage } from '@/hooks/useLanguage';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { useLanguage } from "@/hooks/useLanguage";
+import { Button } from "@/components/ui/button";
+import {
+  ArrowRight,
+  Code2,
+  Server,
+  Database,
+  Cloud,
+  Layers,
+  Sparkles,
+} from "lucide-react";
+
+const techStack = [
+  { name: "React", icon: Code2, color: "text-blue-500" },
+  { name: "Node.js", icon: Server, color: "text-green-500" },
+  { name: "PostgreSQL", icon: Database, color: "text-purple-500" },
+  { name: "AWS", icon: Cloud, color: "text-orange-500" },
+  { name: "AI", icon: Sparkles, color: "text-pink-500" },
+];
 
 export function Hero() {
   const { t } = useLanguage();
-
-  const skills = [
-    'React/Next.js',
-    'Node.js',
-    'AWS/Cloud',
-    'Product',
-  ];
 
   return (
     <section className="pt-32 pb-20 px-6 max-w-5xl mx-auto min-h-[90vh] flex items-center">
       <div className="grid md:grid-cols-2 gap-12 items-center w-full">
         {/* Text Content */}
-        <div className="order-2 md:order-1 space-y-6">
-          {/* Status Badge */}
-          <div className="inline-flex items-center space-x-2 text-sm font-mono text-primary mb-2">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse-soft" />
-            <span>{t('hero.status')}</span>
+        <div className="order-2 md:order-1 space-y-8">
+          {/* Status */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            {t("hero.status")}
           </div>
-          
+
           {/* Heading */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight">
-            <span className="block text-muted-foreground">{t('hero.greeting')}</span>
-            <span className="block text-primary mt-2">{t('hero.name')}</span>
-          </h1>
-          
+          <div className="space-y-2">
+            <p className="text-lg text-muted-foreground font-medium">
+              {t("hero.tagline")}
+            </p>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground">
+              {t("hero.name")}
+            </h1>
+          </div>
+
           {/* Description */}
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
-            {t('hero.description')}
+          <p className="text-xl text-muted-foreground leading-relaxed max-w-md">
+            {t("hero.description")}
           </p>
-          
-          {/* Skills Tags */}
-          <div className="flex flex-wrap gap-2 pt-2">
-            {skills.map((skill) => (
-              <Badge 
-                key={skill}
-                variant="secondary"
-                className="px-3 py-1.5 text-xs font-mono rounded-full bg-secondary hover:bg-secondary/80 transition-colors cursor-default"
+
+          {/* Tech Stack */}
+          <div className="flex flex-wrap gap-4">
+            {techStack.map((tech) => (
+              <div
+                key={tech.name}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors"
               >
-                {skill}
-              </Badge>
+                <tech.icon className={`w-5 h-5 ${tech.color}`} />
+                <span className="text-sm font-medium text-foreground">
+                  {tech.name}
+                </span>
+              </div>
             ))}
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-4 pt-4">
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-4 pt-2">
             <Button
               asChild
-              className="rounded-full px-6 py-3 h-auto bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 transform hover:scale-[1.02] hover:shadow-chill"
+              size="lg"
+              className="rounded-full px-8 bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 hover:shadow-chill group"
             >
-              <a href="#contact">{t('hero.cta')}</a>
+              <a href="#contact">
+                {t("hero.cta")}
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
             </Button>
             <Button
               asChild
               variant="outline"
-              className="rounded-full px-6 py-3 h-auto border-border hover:border-primary hover:text-primary transition-all duration-300"
+              size="lg"
+              className="rounded-full px-8 border-border hover:border-primary hover:text-primary transition-all duration-300"
             >
-              <a href="#blog">{t('hero.blog')}</a>
+              <a href="#blog">{t("hero.blog")}</a>
             </Button>
           </div>
         </div>
 
-        {/* Photo */}
+        {/* Photo / Visual */}
         <div className="order-1 md:order-2 flex justify-center">
-          <div className="relative w-72 h-72 md:w-96 md:h-96">
-            {/* Decorative blob background */}
-            <div className="absolute inset-0 bg-primary/20 dark:bg-primary/10 rounded-full blur-3xl animate-pulse-soft" />
-            
-            {/* Photo container with blob shape */}
-            <div className="relative w-full h-full overflow-hidden blob-shape border-4 border-background shadow-chill-lg">
-              <img
-                src="/profile.jpg"
-                alt="Profile"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                onError={(e) => {
-                  // Fallback si la imagen no existe
-                  const target = e.target as HTMLImageElement;
-                  target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=800&fit=crop&crop=faces';
-                }}
-              />
-            </div>
-            
-            {/* Floating badge */}
-            <div className="absolute -bottom-2 -right-2 bg-background px-4 py-2 rounded-2xl shadow-chill border border-border animate-bounce">
-              <span className="text-2xl">👋</span>
+          <div className="relative">
+            {/* Background decoration */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-accent/20 to-primary/30 rounded-full blur-3xl scale-110 animate-pulse-soft" />
+
+            {/* Main image container */}
+            <div className="relative w-72 h-72 md:w-80 md:h-80">
+              <div className="w-full h-full rounded-3xl overflow-hidden border-4 border-background shadow-chill-lg rotate-3 hover:rotate-0 transition-transform duration-500">
+                <img
+                  src="/profile.png"
+                  alt="Valentín Caceres"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src =
+                      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=800&fit=crop&crop=faces";
+                  }}
+                />
+              </div>
+
+              {/* Floating elements */}
+              <div className="absolute -bottom-4 -right-4 bg-background p-3 rounded-2xl shadow-chill border border-border">
+                <Layers className="w-6 h-6 text-primary" />
+              </div>
+
+              <div className="absolute -top-4 -left-4 bg-primary text-primary-foreground px-4 py-2 rounded-full shadow-chill text-sm font-medium">
+                4+ años exp.
+              </div>
             </div>
           </div>
         </div>
