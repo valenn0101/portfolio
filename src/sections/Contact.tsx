@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLanguage } from "@/hooks/useLanguage";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +7,17 @@ import { Label } from "@/components/ui/label";
 import { Github, Linkedin } from "lucide-react";
 
 export function Contact() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error" | "missing"
+  >("idle");
+  const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT as
+    | string
+    | undefined;
+  const subject =
+    language === "es"
+      ? "Nuevo contacto desde el portfolio"
+      : "New contact from the portfolio";
 
   const socialLinks = [
     {
@@ -56,16 +67,68 @@ export function Contact() {
         </div>
 
         {/* Right side - Form */}
-        <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+        <form
+          className="space-y-5"
+          action={formspreeEndpoint}
+          method="POST"
+          onSubmit={async (event) => {
+            event.preventDefault();
+            if (!formspreeEndpoint) {
+              setStatus("missing");
+              return;
+            }
+
+            const form = event.currentTarget;
+            const data = new FormData(form);
+
+            if (data.get("_gotcha")) {
+              setStatus("success");
+              form.reset();
+              return;
+            }
+
+            try {
+              setStatus("sending");
+              const response = await fetch(formspreeEndpoint, {
+                method: "POST",
+                body: data,
+                headers: {
+                  Accept: "application/json",
+                },
+              });
+
+              if (response.ok) {
+                setStatus("success");
+                form.reset();
+              } else {
+                setStatus("error");
+              }
+            } catch {
+              setStatus("error");
+            }
+          }}
+        >
+          <input type="hidden" name="_subject" value={subject} />
+          <input
+            type="text"
+            name="_gotcha"
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
           <div className="space-y-2">
             <Label htmlFor="name" className="text-sm font-medium">
               {t("contact.form.name")}
             </Label>
             <Input
               id="name"
+              name="name"
               type="text"
               placeholder="John Doe"
+              autoComplete="name"
               className="rounded-xl border-border/50 bg-card focus:border-primary focus:ring-primary/20 transition-all duration-300"
+              required
             />
           </div>
 
@@ -75,9 +138,12 @@ export function Contact() {
             </Label>
             <Input
               id="email"
+              name="email"
               type="email"
               placeholder="john@example.com"
+              autoComplete="email"
               className="rounded-xl border-border/50 bg-card focus:border-primary focus:ring-primary/20 transition-all duration-300"
+              required
             />
           </div>
 
@@ -87,18 +153,39 @@ export function Contact() {
             </Label>
             <Textarea
               id="message"
+              name="message"
               placeholder="Tu mensaje..."
               rows={4}
               className="rounded-xl border-border/50 bg-card focus:border-primary focus:ring-primary/20 transition-all duration-300 resize-none"
+              required
             />
           </div>
 
           <Button
             type="submit"
+            disabled={status === "sending"}
             className="w-full rounded-xl py-3 h-auto bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 hover:shadow-chill"
           >
-            {t("contact.form.send")}
+            {status === "sending" ? t("contact.form.sending") : t("contact.form.send")}
           </Button>
+
+          {status !== "idle" && (
+            <p
+              className={`text-sm ${
+                status === "success"
+                  ? "text-primary"
+                  : status === "missing" || status === "error"
+                    ? "text-destructive"
+                    : "text-muted-foreground"
+              }`}
+              aria-live="polite"
+            >
+              {status === "success" && t("contact.form.success")}
+              {status === "error" && t("contact.form.error")}
+              {status === "missing" && t("contact.form.missing")}
+              {status === "sending" && t("contact.form.sending")}
+            </p>
+          )}
         </form>
       </div>
     </section>

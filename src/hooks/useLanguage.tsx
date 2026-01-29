@@ -94,6 +94,10 @@ const translations = {
     "contact.form.email": "Email",
     "contact.form.message": "Mensaje",
     "contact.form.send": "Enviar mensaje",
+    "contact.form.sending": "Enviando...",
+    "contact.form.success": "¡Mensaje enviado! Te respondo pronto.",
+    "contact.form.error": "Hubo un error al enviar. Intenta nuevamente.",
+    "contact.form.missing": "Falta configurar el endpoint del formulario.",
     "contact.social": "O encuentrame en",
 
     // Footer
@@ -177,6 +181,10 @@ const translations = {
     "contact.form.email": "Email",
     "contact.form.message": "Message",
     "contact.form.send": "Send message",
+    "contact.form.sending": "Sending...",
+    "contact.form.success": "Message sent! I'll get back to you soon.",
+    "contact.form.error": "Something went wrong. Please try again.",
+    "contact.form.missing": "Form endpoint is not configured.",
     "contact.social": "Or find me on",
 
     // Footer
