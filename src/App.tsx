@@ -4,7 +4,6 @@ import { Navigation } from '@/sections/Navigation';
 import { Hero } from '@/sections/Hero';
 import { About } from '@/sections/About';
 import { Skills } from '@/sections/Skills';
-import { Blog } from '@/sections/Blog';
 import { Services } from '@/sections/Services';
 import { Contact } from '@/sections/Contact';
 import { Footer } from '@/sections/Footer';
@@ -19,7 +18,6 @@ function App() {
             <Hero />
             <About />
             <Skills />
-            <Blog />
             <Services />
             <Contact />
           </main>

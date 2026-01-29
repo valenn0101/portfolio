@@ -19,7 +19,7 @@
     --secondary-foreground: 220 9% 18%;
     --muted: 48 14% 93%;
     --muted-foreground: 220 5% 46%; /* #6B7280 */
-    --accent: 214 22% 66%; /* #8FA3BF azul polvo */
+    --accent: 37 18% 53%; /* #9C8B70 beige cálido */
     --accent-foreground: 220 9% 18%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -51,7 +51,7 @@
     --secondary-foreground: 240 5% 91%;
     --muted: 220 9% 20%;
     --muted-foreground: 218 10% 64%; /* #9CA3AF */
-    --accent: 214 28% 73%; /* #A5B8D0 azul niebla */
+    --accent: 29 23% 61%; /* #B29B85 beige cálido suave */
     --accent-foreground: 220 11% 13%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;

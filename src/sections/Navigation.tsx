@@ -1,30 +1,30 @@
-import { useTheme } from '@/hooks/useTheme';
-import { useLanguage } from '@/hooks/useLanguage';
-import { Sun, Moon } from 'lucide-react';
+import { useTheme } from "@/hooks/useTheme";
+import { useLanguage } from "@/hooks/useLanguage";
+import { Sun, Moon } from "lucide-react";
 
 export function Navigation() {
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
 
   const navLinks = [
-    { href: '#about', label: t('nav.about') },
-    { href: '#skills', label: t('nav.skills') },
-    { href: '#blog', label: t('nav.blog') },
-    { href: '#services', label: t('nav.services') },
-    { href: '#contact', label: t('nav.contact') },
+    { href: "#about", label: t("nav.about") },
+    { href: "#skills", label: t("nav.skills") },
+    { href: "#services", label: t("nav.services") },
+    { href: "#contact", label: t("nav.contact") },
   ];
 
   return (
     <nav className="fixed w-full z-50 top-0 glass-nav border-b border-border/50 theme-transition">
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a 
-          href="#" 
-          className="font-mono text-lg font-medium tracking-tight hover:opacity-80 transition-opacity"
+        <a
+          href="#hero"
+          aria-label={t("nav.home")}
+          className="group font-mono text-lg font-semibold tracking-tight hover:opacity-80 transition-opacity"
         >
           <span className="text-primary">~/</span>
-          dev
-          <span className="text-primary">.name</span>
+          <span className="text-foreground">Valentin</span>
+          <span className="text-muted-foreground">.dev</span>
         </a>
 
         {/* Desktop Menu */}
@@ -49,14 +49,22 @@ export function Navigation() {
             className="flex items-center space-x-1 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors duration-300 px-2 py-1 rounded-lg hover:bg-secondary"
             aria-label="Toggle language"
           >
-            <span 
-              className={language === 'es' ? 'font-bold text-foreground' : 'text-muted-foreground'}
+            <span
+              className={
+                language === "es"
+                  ? "font-bold text-foreground"
+                  : "text-muted-foreground"
+              }
             >
               ES
             </span>
             <span className="text-muted-foreground">·</span>
-            <span 
-              className={language === 'en' ? 'font-bold text-foreground' : 'text-muted-foreground'}
+            <span
+              className={
+                language === "en"
+                  ? "font-bold text-foreground"
+                  : "text-muted-foreground"
+              }
             >
               EN
             </span>
@@ -68,7 +76,7 @@ export function Navigation() {
             className="p-2 rounded-full hover:bg-secondary transition-colors duration-300"
             aria-label="Toggle theme"
           >
-            {theme === 'dark' ? (
+            {theme === "dark" ? (
               <Sun className="w-5 h-5 text-foreground" />
             ) : (
               <Moon className="w-5 h-5 text-foreground" />

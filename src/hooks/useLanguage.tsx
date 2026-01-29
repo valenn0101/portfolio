@@ -24,6 +24,7 @@ const translations = {
     "nav.blog": "Blog",
     "nav.services": "Servicios",
     "nav.contact": "Contacto",
+    "nav.home": "Inicio",
 
     // Hero
     "hero.status": "Disponible para trabajar",
@@ -31,6 +32,8 @@ const translations = {
     "hero.name": "Valentín Caceres",
     "hero.description":
       "Full-stack enfocado en arquitectura limpia y entregas end-to-end. Construyo productos escalables con React/Next.js, Node/NestJS, PostgreSQL y AWS.",
+    "hero.experience": "4+ años exp.",
+    "hero.location": "Argentina · Remoto",
     "hero.cta": "Contactar",
     "hero.blog": "Ver Blog",
 
@@ -94,7 +97,7 @@ const translations = {
     "contact.social": "O encuentrame en",
 
     // Footer
-    "footer.rights": "Hecho con calma",
+    "footer.rights": "Hecho con calma en Argentina",
     "footer.madeWith": "Hecho con",
   },
   en: {
@@ -104,6 +107,7 @@ const translations = {
     "nav.blog": "Blog",
     "nav.services": "Services",
     "nav.contact": "Contact",
+    "nav.home": "Home",
 
     // Hero
     "hero.status": "Open to work",
@@ -111,6 +115,8 @@ const translations = {
     "hero.name": "Valentín Caceres",
     "hero.description":
       "Full-stack focused on clean architecture and end-to-end delivery. I build scalable products with React/Next.js, Node/NestJS, PostgreSQL, and AWS.",
+    "hero.experience": "4+ yrs exp.",
+    "hero.location": "Argentina · Remote",
     "hero.cta": "Contact",
     "hero.blog": "View Blog",
 
@@ -174,7 +180,7 @@ const translations = {
     "contact.social": "Or find me on",
 
     // Footer
-    "footer.rights": "Made with calm",
+    "footer.rights": "Made with calm in Argentina",
     "footer.madeWith": "Made with",
   },
 };

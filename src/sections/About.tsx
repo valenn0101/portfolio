@@ -17,6 +17,7 @@ interface Experience {
   description: string;
   highlights: string[];
   skills: string[];
+  logo?: string;
   isCurrent?: boolean;
 }
 
@@ -51,11 +52,20 @@ function ExperienceCard({ exp, isLast }: { exp: Experience; isLast: boolean }) {
 
         {/* Right side - Content */}
         <div className={exp.id % 2 === 0 ? 'md:order-1 md:text-right' : ''}>
-          <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+          <Collapsible open={isOpen} onOpenChange={setIsOpen} className="group">
             {/* Header - Always visible */}
             <div className="flex items-start gap-3 mb-3">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                <Briefcase className="w-6 h-6 text-primary" />
+              <div className="w-12 h-12 rounded-xl bg-secondary/60 border border-border/60 flex items-center justify-center shrink-0 overflow-hidden">
+                {exp.logo ? (
+                  <img
+                    src={exp.logo}
+                    alt={`${exp.company} logo`}
+                    className="w-full h-full object-contain p-2 rounded-lg grayscale opacity-80 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+                    loading="lazy"
+                  />
+                ) : (
+                  <Briefcase className="w-6 h-6 text-primary" />
+                )}
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="font-semibold text-lg text-foreground">{exp.role}</h3>
@@ -147,6 +157,7 @@ export function About() {
       startDate: 'Jun 2025',
       endDate: '',
       duration: language === 'es' ? '8 meses' : '8 mos',
+      logo: '/logos/we_make_footballers_logo.jpeg',
       description: language === 'es' 
         ? 'Enfocado en la mejora continua y estabilidad del ecosistema de aplicaciones. Trabajo en un ciclo continuo de entrega y mantenimiento, resolviendo incidentes técnicos y desarrollando nuevas funcionalidades.'
         : 'Focused on the continuous improvement and stability of the application ecosystem. I work in an ongoing delivery and maintenance cycle, resolving technical incidents and developing new features.',
@@ -175,6 +186,7 @@ export function About() {
       startDate: 'Aug 2023',
       endDate: 'Jun 2025',
       duration: language === 'es' ? '1 año 11 meses' : '1 yr 11 mos',
+      logo: '/logos/scalemote_solutions_logo.jpeg',
       description: language === 'es'
         ? 'Desarrollador Full-Stack trabajando con JavaScript/TypeScript usando frameworks como NestJS y Next.js, así como PHP con Laravel. Apliqué herramientas como Docker y AWS para construir entornos escalables.'
         : 'As a Full-Stack Developer, I worked with JavaScript/TypeScript using frameworks such as NestJS and Next.js, as well as PHP with Laravel. I applied tools like Docker and AWS to build scalable environments.',
@@ -202,6 +214,7 @@ export function About() {
       startDate: 'Mar 2020',
       endDate: 'Jan 2023',
       duration: language === 'es' ? '2 años 11 meses' : '2 yrs 11 mos',
+      logo: '/logos/ypf_s_a__logo.jpeg',
       description: language === 'es'
         ? 'Participé en cursos y charlas de desarrollo profesional. Colaboré en ideathons trabajando en equipo para desarrollar soluciones a desafíos técnicos y sociales.'
         : 'Participated in courses and talks on professional development. Collaborated in ideathons working as a team to develop solutions to technical and social challenges.',

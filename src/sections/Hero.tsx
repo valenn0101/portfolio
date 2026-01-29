@@ -22,15 +22,14 @@ export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section className="pt-32 pb-20 px-6 max-w-5xl mx-auto min-h-[90vh] flex items-center">
+    <section id="hero" className="pt-32 pb-20 px-6 max-w-5xl mx-auto min-h-[90vh] flex items-center">
       <div className="grid md:grid-cols-2 gap-12 items-center w-full">
         {/* Text Content */}
         <div className="order-2 md:order-1 space-y-8">
-          {/* Status */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            {t("hero.status")}
-          </div>
+          {/* Location */}
+          <p className="text-sm text-muted-foreground font-medium">
+            {t("hero.location")}
+          </p>
 
           {/* Heading */}
           <div className="space-y-2">
@@ -74,14 +73,6 @@ export function Hero() {
                 <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="rounded-full px-8 border-border hover:border-primary hover:text-primary transition-all duration-300"
-            >
-              <a href="#blog">{t("hero.blog")}</a>
-            </Button>
           </div>
         </div>
 
@@ -89,7 +80,7 @@ export function Hero() {
         <div className="order-1 md:order-2 flex justify-center">
           <div className="relative">
             {/* Background decoration */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-accent/20 to-primary/30 rounded-full blur-3xl scale-110 animate-pulse-soft" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/40 to-primary/20 rounded-full blur-3xl scale-110 animate-pulse-soft" />
 
             {/* Main image container */}
             <div className="relative w-72 h-72 md:w-80 md:h-80">
@@ -112,7 +103,7 @@ export function Hero() {
               </div>
 
               <div className="absolute -top-4 -left-4 bg-primary text-primary-foreground px-4 py-2 rounded-full shadow-chill text-sm font-medium">
-                4+ años exp.
+                {t("hero.experience")}
               </div>
             </div>
           </div>
