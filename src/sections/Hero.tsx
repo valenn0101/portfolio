@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "@/hooks/useLanguage";
 import { Button } from "@/components/ui/button";
 import {
@@ -6,8 +7,8 @@ import {
   Server,
   Database,
   Cloud,
-  Layers,
   Sparkles,
+  MapPin,
 } from "lucide-react";
 
 const techStack = [
@@ -20,17 +21,43 @@ const techStack = [
 
 export function Hero() {
   const { t } = useLanguage();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const eyesRef = useRef<HTMLDivElement>(null);
+
+  // Seguimiento del mouse para los ojos
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Calcular posición de las pupilas
+  const calculatePupilPosition = () => {
+    if (!eyesRef.current) return { x: 0, y: 0 };
+
+    const rect = eyesRef.current.getBoundingClientRect();
+    const eyeCenterX = rect.left + rect.width / 2;
+    const eyeCenterY = rect.top + rect.height / 2;
+
+    const angle = Math.atan2(mousePos.y - eyeCenterY, mousePos.x - eyeCenterX);
+    const distance = Math.min(8, Math.hypot(mousePos.x - eyeCenterX, mousePos.y - eyeCenterY) / 30);
+
+    return {
+      x: Math.cos(angle) * distance,
+      y: Math.sin(angle) * distance
+    };
+  };
+
+  const pupilPos = calculatePupilPosition();
 
   return (
     <section id="hero" className="pt-32 pb-20 px-6 max-w-5xl mx-auto min-h-[90vh] flex items-center">
       <div className="grid md:grid-cols-2 gap-12 items-center w-full">
         {/* Text Content */}
         <div className="order-2 md:order-1 space-y-8">
-          {/* Location */}
-          <p className="text-sm text-muted-foreground font-medium">
-            {t("hero.location")}
-          </p>
-
           {/* Heading */}
           <div className="space-y-2">
             <p className="text-lg text-muted-foreground font-medium">
@@ -98,12 +125,61 @@ export function Hero() {
               </div>
 
               {/* Floating elements */}
-              <div className="absolute -bottom-4 -right-4 bg-background p-3 rounded-2xl shadow-chill border border-border">
-                <Layers className="w-6 h-6 text-primary" />
+              {/* Badge fijo: Remote Argentina */}
+              <div className="absolute -top-4 -left-4 bg-primary text-primary-foreground px-4 py-2 rounded-full shadow-chill text-sm font-medium flex items-center gap-1.5">
+                <MapPin className="w-4 h-4" />
+                <span>Remote · Argentina</span>
               </div>
 
-              <div className="absolute -top-4 -left-4 bg-primary text-primary-foreground px-4 py-2 rounded-full shadow-chill text-sm font-medium">
-                {t("hero.experience")}
+              {/* Personaje Blob que sigue el mouse */}
+              <div className="absolute -bottom-6 -right-6">
+                <div className="relative animate-bounce-slow">
+                  {/* Cuerpo/Cabeza del blob */}
+                  <div className="relative w-24 h-24 bg-gradient-to-br from-primary/90 to-accent/90 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] shadow-chill-lg flex flex-col items-center justify-center border-2 border-background">
+                    {/* Ojos */}
+                    <div ref={eyesRef} className="flex gap-3 mb-2 mt-2">
+                      {/* Ojo izquierdo */}
+                      <div className="relative w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md">
+                        <div
+                          className="w-3 h-3 bg-gray-900 rounded-full transition-transform duration-100 ease-out"
+                          style={{
+                            transform: `translate(${pupilPos.x}px, ${pupilPos.y}px)`
+                          }}
+                        >
+                          {/* Brillo en la pupila */}
+                          <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white rounded-full" />
+                        </div>
+                      </div>
+                      {/* Ojo derecho */}
+                      <div className="relative w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md">
+                        <div
+                          className="w-3 h-3 bg-gray-900 rounded-full transition-transform duration-100 ease-out"
+                          style={{
+                            transform: `translate(${pupilPos.x}px, ${pupilPos.y}px)`
+                          }}
+                        >
+                          {/* Brillo en la pupila */}
+                          <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white rounded-full" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Boca sonriente */}
+                    <div className="w-10 h-4 border-b-3 border-white rounded-full opacity-80" />
+
+                    {/* Brazo izquierdo */}
+                    <div className="absolute -left-4 top-10 w-6 h-2 bg-primary/80 rounded-full origin-right animate-wave" />
+
+                    {/* Brazo derecho */}
+                    <div
+                      className="absolute -right-4 top-10 w-6 h-2 bg-primary/80 rounded-full origin-left animate-wave"
+                      style={{ animationDelay: '0.3s' }}
+                    />
+                  </div>
+
+                  {/* Sombra del personaje */}
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-3 bg-foreground/10 rounded-full blur-sm" />
+                </div>
               </div>
             </div>
           </div>

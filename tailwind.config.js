@@ -111,6 +111,18 @@ module.exports = {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.7" },
         },
+        "wave": {
+          "0%, 100%": { transform: "rotate(-45deg) translateY(0)" },
+          "50%": { transform: "rotate(-45deg) translateY(-4px)" },
+        },
+        "wave-right": {
+          "0%, 100%": { transform: "rotate(45deg) translateY(0)" },
+          "50%": { transform: "rotate(45deg) translateY(-4px)" },
+        },
+        "bounce-slow": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -119,6 +131,8 @@ module.exports = {
         "morph": "morph 8s ease-in-out infinite",
         "fade-in": "fade-in 0.5s ease-out forwards",
         "pulse-soft": "pulse-soft 3s ease-in-out infinite",
+        "wave": "wave 2s ease-in-out infinite",
+        "bounce-slow": "bounce-slow 3s ease-in-out infinite",
       },
       transitionDuration: {
         '400': '400ms',

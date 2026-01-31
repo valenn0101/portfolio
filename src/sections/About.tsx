@@ -40,9 +40,9 @@ function ExperienceCard({ exp, isLast }: { exp: Experience; isLast: boolean }) {
       </div>
 
       {/* Content */}
-      <div className={`md:grid md:grid-cols-2 md:gap-8 ${isLast ? '' : 'pb-8'}`}>
+      <div className={`md:grid md:grid-cols-2 md:gap-16 ${isLast ? '' : 'pb-8'}`}>
         {/* Left side - Date (desktop) */}
-        <div className={`hidden md:block md:text-right ${exp.id % 2 === 0 ? 'md:order-2 md:text-left' : ''}`}>
+        <div className={`hidden md:flex md:flex-col ${exp.id % 2 === 0 ? 'md:order-2 md:items-start md:pl-4' : 'md:items-end md:pr-4'}`}>
           <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
             <Calendar className="w-4 h-4" />
             <span>{exp.startDate} — {exp.isCurrent ? t('about.present') : exp.endDate}</span>
@@ -51,24 +51,24 @@ function ExperienceCard({ exp, isLast }: { exp: Experience; isLast: boolean }) {
         </div>
 
         {/* Right side - Content */}
-        <div className={exp.id % 2 === 0 ? 'md:order-1 md:text-right' : ''}>
+        <div className={`${exp.id % 2 === 0 ? 'md:order-1 md:text-right md:pr-4' : 'md:pl-4'}`}>
           <Collapsible open={isOpen} onOpenChange={setIsOpen} className="group">
             {/* Header - Always visible */}
             <div className="flex items-start gap-3 mb-3">
-              <div className="w-12 h-12 rounded-xl bg-secondary/60 border border-border/60 flex items-center justify-center shrink-0 overflow-hidden">
+              <div className="w-12 h-12 rounded-xl bg-secondary/60 border border-border/60 flex items-center justify-center shrink-0 overflow-hidden transition-all duration-300 group-hover:bg-primary/10 group-hover:border-primary/40 group-hover:shadow-md">
                 {exp.logo ? (
                   <img
                     src={exp.logo}
                     alt={`${exp.company} logo`}
-                    className="w-full h-full object-contain p-2 rounded-lg grayscale opacity-80 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+                    className="w-full h-full object-contain p-2 rounded-lg grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110"
                     loading="lazy"
                   />
                 ) : (
-                  <Briefcase className="w-6 h-6 text-primary" />
+                  <Briefcase className="w-6 h-6 text-primary transition-transform duration-300 group-hover:scale-110" />
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-lg text-foreground">{exp.role}</h3>
+                <h3 className="font-semibold text-lg text-foreground transition-colors duration-300 group-hover:text-primary">{exp.role}</h3>
                 <p className="text-primary font-medium">{exp.company}</p>
               </div>
             </div>
@@ -91,21 +91,21 @@ function ExperienceCard({ exp, isLast }: { exp: Experience; isLast: boolean }) {
 
             {/* Expand/Collapse Button */}
             <CollapsibleTrigger asChild>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className={`group px-0 hover:bg-transparent text-muted-foreground hover:text-foreground ${exp.id % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+              <Button
+                variant="ghost"
+                size="sm"
+                className={`group/button px-0 hover:bg-transparent text-muted-foreground hover:text-primary transition-colors duration-300 ${exp.id % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
               >
                 <span className="text-sm font-medium">
                   {isOpen ? t('about.showLess') : t('about.showMore')}
                 </span>
-                <ChevronDown className={`w-4 h-4 ml-1 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''} ${exp.id % 2 === 0 ? 'md:ml-0 md:mr-1' : ''}`} />
+                <ChevronDown className={`w-4 h-4 ml-1 transition-transform duration-300 group-hover/button:scale-110 ${isOpen ? 'rotate-180' : ''} ${exp.id % 2 === 0 ? 'md:ml-0 md:mr-1' : ''}`} />
               </Button>
             </CollapsibleTrigger>
 
             {/* Collapsible Content */}
-            <CollapsibleContent className="CollapsibleContent">
-              <div className="pt-4 space-y-4 animate-in slide-in-from-top-2 duration-300">
+            <CollapsibleContent>
+              <div className="pt-4 space-y-4">
                 {/* Description */}
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {exp.description}
@@ -127,9 +127,9 @@ function ExperienceCard({ exp, isLast }: { exp: Experience; isLast: boolean }) {
                 {/* Skills */}
                 <div className={`flex flex-wrap gap-2 pt-2 ${exp.id % 2 === 0 ? 'md:justify-end' : ''}`}>
                   {exp.skills.map((skill) => (
-                    <span 
+                    <span
                       key={skill}
-                      className="text-xs px-2 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-primary/10 hover:text-primary transition-colors cursor-default"
+                      className="text-xs px-2 py-1 rounded-full bg-secondary text-secondary-foreground border border-transparent hover:bg-primary/15 hover:text-primary hover:border-primary/30 hover:shadow-sm transition-all duration-300 cursor-default transform hover:scale-105"
                     >
                       {skill}
                     </span>
