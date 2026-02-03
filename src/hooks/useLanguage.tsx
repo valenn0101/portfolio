@@ -198,13 +198,19 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined,
 );
 
+function getBrowserLanguage(): Language {
+  if (typeof window === "undefined") return "en";
+  const browserLang = navigator.language.toLowerCase();
+  return browserLang.startsWith("es") ? "es" : "en";
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("language") as Language;
       if (saved && (saved === "es" || saved === "en")) return saved;
     }
-    return "es";
+    return getBrowserLanguage();
   });
 
   useEffect(() => {
