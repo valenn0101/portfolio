@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, Loader2 } from "lucide-react";
 
 export function Contact() {
   const { t, language } = useLanguage();
@@ -166,7 +166,14 @@ export function Contact() {
             disabled={status === "sending"}
             className="w-full rounded-xl py-3 h-auto bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 hover:shadow-chill"
           >
-            {status === "sending" ? t("contact.form.sending") : t("contact.form.send")}
+            {status === "sending" ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                {t("contact.form.sending")}
+              </>
+            ) : (
+              t("contact.form.send")
+            )}
           </Button>
 
           {status !== "idle" && (
