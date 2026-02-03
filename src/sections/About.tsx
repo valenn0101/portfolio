@@ -54,7 +54,7 @@ function ExperienceCard({ exp, isLast }: { exp: Experience; isLast: boolean }) {
         <div className={`${exp.id % 2 === 0 ? 'md:order-1 md:text-right md:pr-4' : 'md:pl-4'}`}>
           <Collapsible open={isOpen} onOpenChange={setIsOpen} className="group">
             {/* Header - Always visible */}
-            <div className="flex items-start gap-3 mb-3">
+            <div className={`flex items-start gap-3 mb-3 ${exp.id % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
               <div className="w-12 h-12 rounded-xl bg-secondary/60 border border-border/60 flex items-center justify-center shrink-0 overflow-hidden transition-all duration-300 group-hover:bg-primary/10 group-hover:border-primary/40 group-hover:shadow-md">
                 {exp.logo ? (
                   <img
@@ -67,7 +67,7 @@ function ExperienceCard({ exp, isLast }: { exp: Experience; isLast: boolean }) {
                   <Briefcase className="w-6 h-6 text-primary transition-transform duration-300 group-hover:scale-110" />
                 )}
               </div>
-              <div className="flex-1 min-w-0">
+              <div className={`flex-1 min-w-0 ${exp.id % 2 === 0 ? 'md:text-right' : ''}`}>
                 <h3 className="font-semibold text-lg text-foreground transition-colors duration-300 group-hover:text-primary">{exp.role}</h3>
                 <p className="text-primary font-medium">{exp.company}</p>
               </div>
