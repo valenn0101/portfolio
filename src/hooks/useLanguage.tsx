@@ -5,6 +5,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { track } from "@vercel/analytics/react";
 
 export type Language = "es" | "en";
 
@@ -212,10 +213,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [language]);
 
   const toggleLanguage = () => {
-    setLanguageState((prev) => (prev === "es" ? "en" : "es"));
+    setLanguageState((prev) => {
+      const newLang = prev === "es" ? "en" : "es";
+      track("language_changed", { from: prev, to: newLang });
+      return newLang;
+    });
   };
 
   const setLanguage = (lang: Language) => {
+    if (lang !== language) {
+      track("language_changed", { from: language, to: lang });
+    }
     setLanguageState(lang);
   };
 

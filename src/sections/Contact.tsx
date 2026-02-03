@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Github, Linkedin, Loader2 } from "lucide-react";
+import { track } from "@vercel/analytics/react";
 
 export function Contact() {
   const { t, language } = useLanguage();
@@ -56,6 +57,7 @@ export function Contact() {
                 <a
                   key={link.label}
                   href={link.href}
+                  onClick={() => track("social_link_clicked", { platform: link.label })}
                   className="p-3 rounded-xl bg-secondary hover:bg-primary hover:text-primary-foreground transition-all duration-300 text-muted-foreground"
                   aria-label={link.label}
                 >
@@ -99,6 +101,7 @@ export function Contact() {
 
               if (response.ok) {
                 setStatus("success");
+                track("contact_form_submitted");
                 form.reset();
               } else {
                 setStatus("error");
