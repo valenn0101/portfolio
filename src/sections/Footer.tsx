@@ -21,9 +21,8 @@ export function Footer() {
     <footer className="py-12 px-6 border-t border-border/50 mt-10">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         {/* Copyright */}
-        <div className="text-sm text-muted-foreground flex items-center gap-1">
-          <span>© {new Date().getFullYear()} Valentín Caceres.</span>
-          <span className="hidden sm:inline">{t("footer.rights")}</span>
+        <div className="text-sm text-muted-foreground">
+          <span>© {new Date().getFullYear()} Valentín Caceres</span>
         </div>
 
         {/* Made with */}
