@@ -1,11 +1,9 @@
-import { ThemeProvider } from "@/hooks/useTheme";
-import { LanguageProvider } from "@/hooks/useLanguage";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import { LanguageProvider } from "@/providers/LanguageProvider";
 import { Navigation } from "@/sections/Navigation";
 import { Hero } from "@/sections/Hero";
-import { About } from "@/sections/About";
-import { Skills } from "@/sections/Skills";
-import { Services } from "@/sections/Services";
-import { Contact } from "@/sections/Contact";
+import { Experience } from "@/sections/Experience";
+import { Education } from "@/sections/Education";
 import { Footer } from "@/sections/Footer";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -13,14 +11,12 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <div className="min-h-screen bg-background text-foreground theme-transition">
+        <div className="notebook">
           <Navigation />
-          <main>
+          <main id="main">
             <Hero />
-            <About />
-            <Skills />
-            <Services />
-            <Contact />
+            <Experience />
+            <Education />
           </main>
           <Footer />
         </div>
